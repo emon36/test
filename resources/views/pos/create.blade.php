@@ -10,7 +10,19 @@
             <div class="card mb-md-0">
                 <div class="card-body">
                     <div class="card-title">POS</div>
-                    <form  method="POST" action="" id="pos">
+
+                    <div class="row">
+                        <div class="col-sm-4 col-md-4">
+                            <form method="GET" action="{{route('findPos')}}">
+                                <div class="input-group">
+                                    <input type="number" name="billNo" placeholder="Enter Bill NO" class="form-control">
+                                    <button class="btn btn-sm btn-info"  type="sumbit">Find</button>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                    <form  method="POST" action="" id="pos" class="mt-5">
                         @csrf
                         <div class="row">
                         <div class="form-group col-md-3">
@@ -24,7 +36,7 @@
                         </div>
                         <div class="form-group col-md-3">
                             <label class="control-label">Date</label>
-                            <input name="date"  class="form-control datepicker" type="date" >
+                            <input name="date"   class="form-control datepicker" type="date" >
                         </div>
                         </div>
 

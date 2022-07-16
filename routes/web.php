@@ -19,7 +19,7 @@ Route::get('/', function () {
 });
 
 Route::get('pos',[InventoryController::class,'create'])->name('pos.create');
-Route::get('find/pos',[InventoryController::class,'show'])->name('pos.show');
 Route::get('findPrice',[InventoryController::class,'findPrice'])->name('findPrice');
 Route::get('findPos',[InventoryController::class,'find'])->name('findPos');
 Route::post('pos/store',[InventoryController::class,'store'])->name('pos.store');
+Route::post('pos/update',[InventoryController::class,'update'])->name('pos.update');

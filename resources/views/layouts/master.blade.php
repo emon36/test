@@ -71,9 +71,6 @@
                             <li>
                                 <a href="{{route('pos.create')}}">Create POS</a>
                             </li>
-                            <li>
-                                <a href="{{route('pos.show')}}">Edit POS</a>
-                            </li>
 
                         </ul>
                     </div>

@@ -57,19 +57,48 @@ class InventoryController extends Controller
 
     }
 
-    public function show()
+    public function update(Request $request)
     {
-        $customers =  Customer::all();
-        $products = Product::all();
-        return view('pos.edit',['customers'=>$customers,'products'=>$products]);
+
+        $inventory =  Inventory::where('id',$request->inventory_id)->first();
+
+        $inventory->date = $request->date;
+        $inventory->customer_id = $request->customer_id;
+        $inventory->totalBillAmount	= $request->totalBillAmount;
+        $inventory->totalDiscount	= $request->totalDiscount;
+        $inventory->paidAmount	= $request->paidAmount;
+        $inventory->dueAmount	= $request->dueAmount;
+        $inventory->update();
+
+
+        foreach ( $request->inventoryProduct_id as $key => $inventoryProduct_id){
+
+            $data = array(
+                'product_id'=>$request->product_id[$key],
+                'rate'=> $request->price[$key],
+                'qty'=>$request->qty[$key],
+                'discount'=>$request->dis[$key],
+            );
+
+            InventoryProduct::where('id', $request->inventoryProduct_id[$key])->update($data);
+        }
+
+        return response()->json(['success' => true]);
+
+
     }
+
 
     public function find(Request $request)
     {
         $billNo = $request->billNo;
 
         $data = Inventory::with('inventoryProducts')->where('billNo',$billNo)->get();
-        dd($data);
+
+        $customers =  Customer::all();
+        $products = Product::all();
+        return view('pos.edit',['customers'=>$customers,'products'=>$products,'data'=>$data]);
+
     }
 
 }
